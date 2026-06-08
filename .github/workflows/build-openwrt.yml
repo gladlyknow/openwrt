@@ -57,9 +57,9 @@ jobs:
         # 1. 解锁 Lean 源码自带的 helloworld 依赖源（内含 SSR-Plus 的全套核心依赖组件）
         sed -i 's/^#\(src-git helloworld\)/\1/' feeds.conf.default
         
-        # 2. 绕过脆弱的 feeds 机制，直接将 Passwall 及其依赖深度克隆至 package 核心目录
-        git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages.git package/passwall_packages
-        git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall.git package/passwall_luci
+        # 2. 修正：使用 Passwall 官方组织最新的合法 URL，彻底规避由于重定向引发的认证报错
+        git clone --depth=1 https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git package/passwall_packages
+        git clone --depth=1 https://github.com/Openwrt-Passwall/openwrt-passwall.git package/passwall_luci
         
         # 3. 稳妥更新并安装全套组件
         ./scripts/feeds update -a
